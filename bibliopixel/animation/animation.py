@@ -85,6 +85,10 @@ class Animation(object):
     def _led(self, layout):
         self.layout = layout
 
+    def set_palette(self, name):
+        self.palette = legacy_palette.pop_legacy_palette(
+                {"palette": name}, *self.COLOR_DEFAULTS)
+
     @property
     def color_list(self):
         return self.layout.color_list
