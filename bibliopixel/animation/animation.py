@@ -68,8 +68,7 @@ class Animation(object):
         self.sleep_time = 0
         self.preframe_callbacks = []
         self.fail_on_exception = self.FAIL_ON_EXCEPTION if fail_on_exception is None else fail_on_exception
-        self.rc = redis.Redis('localhost', charset="utf-8",
-                decode_responses=True)
+        self.rc = redis.Redis('localhost', decode_responses=True)
 
     def set_project(self, project):
         self.time = project.clock.time
@@ -84,6 +83,10 @@ class Animation(object):
     @_led.setter
     def _led(self, layout):
         self.layout = layout
+
+    def set_palette(self, name):
+        self.palette = legacy_palette.pop_legacy_palette(
+                {"palette": name}, *self.COLOR_DEFAULTS)
 
     @property
     def color_list(self):
